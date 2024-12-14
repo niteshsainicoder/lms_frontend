@@ -11,20 +11,53 @@ type Item = {
   duration: string,
   disabled: boolean
 }
+
+type localstorage = {
+  data: {
+    email: string,
+    enrolledCourses: string[],
+    name: string,
+    password: string,
+    _id: string,
+  }
+  message
+  :
+  "User Logged In Successfully"
+
+}
 const CourseItemRead = ({ ownerId, Id, title, description, instructor, duration, disabled = false }: Item) => {
   const { setPopUpMessage } = useContexts();
+
   const enroll = async () => {
-    console.log(ownerId, Id,'clicked');
-    
-    if (Id == '' || Id == null || Id == undefined || title == '') {
-      setPopUpMessage('Please select a course')
-      return
+    console.log(ownerId, Id, 'clicked');
+
+    if (!Id || !title) {
+        setPopUpMessage('Please select a course');
+        return;
     }
-    const result = await enrollInCourse(ownerId,Id);  
+
+    const result = await enrollInCourse(ownerId, Id);
     setPopUpMessage(result.message);
 
+    if (result.message === 'Course Enrolled') {
+        const storedData = localStorage.getItem('user');
+        
+        if (storedData) {
+            const data: localstorage = JSON.parse(storedData);
 
-  }
+            if (data?.data?.enrolledCourses) {
+                if (!data.data.enrolledCourses.includes(Id)) {
+                    data.data.enrolledCourses.push(Id);
+                    localStorage.setItem('user', JSON.stringify(data));
+                    console.log('Updated localStorage:', data);
+                } else {
+                    console.log('Course already enrolled');
+                }
+            }
+        }
+    }
+};
+
   return (
     <div className=' relative rounded-lg p-4 ring hover:shadow-xl transition-all ring-slate-300 sm:w-[300px] sm:min-w-[300px] sm:max-w-[300px] h-[180px] sm:min-h-[180px] sm:max-h-[200px]'>
       <h1 className='text-ellipsis line-clamp-1 '><span className='font-bold antialiased'>Title</span> : {title}</h1>

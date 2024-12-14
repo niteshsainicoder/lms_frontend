@@ -1,7 +1,7 @@
 'use client';
 
 import CourseItemRead from '@/components/CourseItemRead';
-import { GetAllCourses } from '@/utils/functions/CourseCrud';
+import { enrollInCourse, GetAllCourses } from '@/utils/functions/CourseCrud';
 import React, { useEffect, useState } from 'react'
 
 type Item = {
@@ -12,15 +12,27 @@ type Item = {
     instructor: string,
     duration: string,
     disabled: boolean
-  }
+}
+
+type arr = {
+    description: string,
+    duration: string,
+    instructor: string,
+    title: string,
+    _id: string
+}
+interface CourseResponse {
+    AllCourses: arr[];  // List of courses
+    message: string;     // Success or error message
+}
 const Page = () => {
-    const [Data, setdata] = useState<any>();
     const [DisplayData, setDisplayData] = useState<Item[]>([{ ownerId: '', _id: '', title: '', description: '', instructor: '', duration: '', disabled: false }]);
     useEffect(() => {
         let result = localStorage.getItem('user')
         if (result) {
+
             let datas = JSON.parse(result!);
-            setdata(datas);
+            console.log('login data,', datas);
 
             const anotherData = async () => {
                 const response = await GetAllCourses();
@@ -38,20 +50,22 @@ const Page = () => {
         }
     }, [])
     useEffect(() => {
-        localStorage.removeItem('user');
+       
     }, [DisplayData])
 
     return (
         <div className='w-full relative h-screen bg-stone-100 flex flex-col items-center justify-start gap-7'>
             <div className="w-full min-h-16 text-slate-100 bg-neutral-500 flex justify-around items-center">
                 <h1 className="font-bold text-xl ">Hii, {'nitesh'}</h1>
-                <p>Enrolled Courses : {Data?.data.enrolledCourses.length}</p>
+                <p>Enrolled Courses : {DisplayData?.length}</p>
 
             </div>
             <div className=" w-10/12 lg:w-8/12 grid   grid-cols-1 sm:grid-cols-2  lg:grid-cols-3 gap-7">
                 {DisplayData?.map((val: { _id: string; title: string; description: string; duration: string; instructor: string; }, index: React.Key | null | undefined) => <CourseItemRead key={index} Id={val._id} title={val.title} description={val.description} duration={val.duration} instructor={val.instructor} ownerId={''} disabled={true} />)}
             </div>
         </div>
+
+
     )
 }
 

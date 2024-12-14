@@ -12,6 +12,9 @@ function Page() {
 
     const login = async () => {
         const data = await Login(Email, Password, AdminLogin, setwait);
+        if (localStorage.getItem('user')) {
+            localStorage.removeItem('user')
+        }
         localStorage.setItem('user', JSON.stringify(data))
     }
 
