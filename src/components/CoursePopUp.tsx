@@ -12,7 +12,7 @@ type Items = {
 
 }
 const CoursePopUp = ({ Id, type }: { Id: string, type: string }) => {
-  const { setEditPopUp,setPopUpMessage } = useContexts();
+  const { setEditPopUp, setPopUpMessage } = useContexts();
   const [data, setData] = useState<Items>({ _id: '', title: 'New Course', description: 'New Course', duration: 'Unlimited', instructor: 'You' })
 
   const onClick = async () => {
@@ -37,7 +37,7 @@ const CoursePopUp = ({ Id, type }: { Id: string, type: string }) => {
       setPopUpMessage(result.message)
 
     }
-setEditPopUp({Id:'',Method:''})
+    setEditPopUp({ Id: '', Method: '' })
   }
 
 
@@ -50,7 +50,7 @@ setEditPopUp({Id:'',Method:''})
     if (Id !== 'new') {
       getItem();
     }
-  }, [])
+  }, [Id])
   return (
     <div className=' absolute top-0 left-0 z-50 w-screen h-screen backdrop-blur-[2px]  flex items-center justify-center drop-shadow-lg'>
       <div className='w-full h-4/6 relative rounded-lg ring ring-stone-300 shadow-2xl  sm:w-3/4 sm:min-h-[300px] md:h-[300px] md:w-1/2 bg-slate-400 flex sm:flex-row flex-col  items-center justify-center  gap-4 md:gap-4  p-4 sm:p-6 md:px-16   '>

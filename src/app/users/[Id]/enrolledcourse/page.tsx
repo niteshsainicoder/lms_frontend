@@ -1,7 +1,7 @@
 'use client';
 
 import CourseItemRead from '@/components/CourseItemRead';
-import { enrollInCourse, GetAllCourses } from '@/utils/functions/CourseCrud';
+import {  GetAllCourses } from '@/utils/functions/CourseCrud';
 import React, { useEffect, useState } from 'react'
 
 type Item = {
@@ -14,17 +14,8 @@ type Item = {
     disabled: boolean
 }
 
-type arr = {
-    description: string,
-    duration: string,
-    instructor: string,
-    title: string,
-    _id: string
-}
-interface CourseResponse {
-    AllCourses: arr[];  // List of courses
-    message: string;     // Success or error message
-}
+
+
 const Page = () => {
     const [DisplayData, setDisplayData] = useState<Item[]>([{ ownerId: '', _id: '', title: '', description: '', instructor: '', duration: '', disabled: false }]);
     useEffect(() => {
@@ -36,7 +27,7 @@ const Page = () => {
 
             const anotherData = async () => {
                 const response = await GetAllCourses();
-                let arr = [];
+                const arr = [];
                 for (let i = 0; i < response.AllCourses?.length; i++) {
                     for (let j = 0; j < datas.data.enrolledCourses?.length; j++) {
                         if (response.AllCourses[i]?._id == datas.data?.enrolledCourses[j]) {
