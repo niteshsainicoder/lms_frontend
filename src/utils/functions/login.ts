@@ -1,13 +1,14 @@
 
 export const Login = async (Email: string, Password: string, AdminLogin: boolean, setwait: React.Dispatch<React.SetStateAction<boolean>>) => {
     try {
+console.log(process.env.NEXT_PUBLIC_SERVER_URL);
 
         setwait(true)
         if (!Email || !Password) {
             alert('Please Provide Email and Password')
         }
         if (AdminLogin) {
-            const response = await fetch('http://localhost:3000/admin/login', {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/admin/login`, {
                 method: 'POST', headers: {
                     'Content-Type': 'application/json'
                 }, body: JSON.stringify({ Email, Password })
@@ -22,7 +23,7 @@ export const Login = async (Email: string, Password: string, AdminLogin: boolean
             setwait(false)
             return;
         }
-        const response = await fetch('http://localhost:3000/users/login', {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/users/login`, {
             method: 'POST', headers: {
                 'Content-Type': 'application/json'
             }, body: JSON.stringify({ Email, Password })
@@ -34,7 +35,7 @@ export const Login = async (Email: string, Password: string, AdminLogin: boolean
             return data
         }
         else {
-            console.log(data.message);
+            console.log(data);
 
         }
         console.log(data, 'this is the data');

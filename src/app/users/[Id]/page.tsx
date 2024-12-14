@@ -44,7 +44,7 @@ const Page = ({
   }, []);
   return (
     <div className='w-full relative h-screen bg-stone-100 flex flex-col items-center justify-start gap-7'>
-      <div className="w-full min-h-16 py-2 text-slate-100 bg-neutral-500 flex flex-col sm:flex-row justify-around items-center gap-4">
+      <div className="w-full min-h-20 h-fit max-h-28 overflow-hidden  py-2 text-slate-100 bg-neutral-500 flex flex-col sm:flex-row justify-around items-center gap-2 sm:gap-4">
         <div className='flex w-full sm:w-2/3 items-center px-2 gap-1 justify-around'>
           <h1 className="font-bold text-lg sm:text-xl ">Hii, {'nitesh'}</h1>
           <span className=' w-2/3  flex px-2 gap-1 rounded-md ring outline-none  ring-stone-400 bg-stone-100'><Image src={'/search-alt-2-svgrepo-com.svg'} width={20} height={20} alt={'search'} /> <input type="text" placeholder='Search' className={`  w-0  sm:w-full text-neutral-600 bg-transparent outline-none  p-1 px-2`} /></span>
