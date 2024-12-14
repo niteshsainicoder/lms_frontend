@@ -4,9 +4,18 @@ import CourseItemRead from '@/components/CourseItemRead';
 import { GetAllCourses } from '@/utils/functions/CourseCrud';
 import React, { useEffect, useState } from 'react'
 
+type Item = {
+    ownerId: string
+    _id: string,
+    title: string,
+    description: string,
+    instructor: string,
+    duration: string,
+    disabled: boolean
+  }
 const Page = () => {
     const [Data, setdata] = useState<any>();
-    const [DisplayData, setDisplayData] = useState<any>([])
+    const [DisplayData, setDisplayData] = useState<Item[]>([{ ownerId: '', _id: '', title: '', description: '', instructor: '', duration: '', disabled: false }]);
     useEffect(() => {
         let result = localStorage.getItem('user')
         if (result) {
