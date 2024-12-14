@@ -30,6 +30,8 @@ function AdminPage({ params }: Params) {
     const fetchData = async () => {
       const data = await GetAllCourses(); // Correctly await the response
       setData(data.AllCourses);
+      console.log(data.AllCourses,'courses list');
+      
     };
     fetchData();
   }, [popUpMessage]);
