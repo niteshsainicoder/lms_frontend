@@ -10,24 +10,28 @@ const page = () => {
     const [DisplayData, setDisplayData] = useState<any>([])
     useEffect(() => {
         let result = localStorage.getItem('user')
-        let datas = JSON.parse(result!);
-        setdata(datas);
+        if (result) {
+            let datas = JSON.parse(result!);
+            setdata(datas);
 
-        const anotherData = async () => {
-            const response = await GetAllCourses();
-            let arr = [];
-            for (let i = 0; i < response.AllCourses.length; i++) {
-                for (let j = 0; j < datas.data.enrolledCourses.length; j++) {
-                    if (response.AllCourses[i]._id == datas.data.enrolledCourses[j]) {
-                        arr.push(response.AllCourses[i]);
+            const anotherData = async () => {
+                const response = await GetAllCourses();
+                let arr = [];
+                for (let i = 0; i < response.AllCourses?.length; i++) {
+                    for (let j = 0; j < datas.data.enrolledCourses?.length; j++) {
+                        if (response.AllCourses[i]?._id == datas.data?.enrolledCourses[j]) {
+                            arr.push(response.AllCourses[i]);
+                        }
                     }
                 }
+                setDisplayData(arr);
             }
-            console.log(arr);
-            setDisplayData(arr);
+            anotherData();
         }
-        anotherData();
     }, [])
+    useEffect(() => {
+        localStorage.removeItem('user');
+    }, [DisplayData])
 
     return (
         <div className='w-full relative h-screen bg-stone-100 flex flex-col items-center justify-start gap-7'>
