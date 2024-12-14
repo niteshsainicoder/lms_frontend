@@ -19,6 +19,8 @@ type Items = {
       });
   
       const data = await response.json();
+      console.log(data,"from api");
+      
         return data;
           
     } catch (error:any) {
