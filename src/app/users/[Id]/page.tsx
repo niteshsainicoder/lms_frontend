@@ -20,7 +20,7 @@ type Items = {
 };
 
 
-const page = ({
+const Page = ({
   params,
 }: Params) => {
   const [data, setData] = useState<Items[]>([{ _id: "", title: "", description: "", duration: "", instructor: "" }]);
@@ -64,4 +64,4 @@ const page = ({
   )
 }
 
-export default page
+export default Page

@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React, { useState } from 'react'
 
-function page() {
+function Page() {
     const [AdminLogin, setAdminLogin] = useState<boolean>(false)
     const [Email, setEmail] = useState<string>('')
     const [Password, setPassword] = useState<string>('')
@@ -46,4 +46,4 @@ function page() {
     )
 }
 
-export default page
+export default Page

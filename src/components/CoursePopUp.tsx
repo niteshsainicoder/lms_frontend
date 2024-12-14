@@ -17,18 +17,18 @@ const CoursePopUp = ({ Id, type }: { Id: string, type: string }) => {
 
   const onClick = async () => {
     if (type == 'delete') {
-      let result = await DeleteCourse(data._id)
+      const result = await DeleteCourse(data._id)
       setPopUpMessage(result.message)
 
     }
     if (type == 'update') {
-      let result = await UpdateCourse(data)
+      const result = await UpdateCourse(data)
       setPopUpMessage(result.message)
 
 
     }
     if (type == 'create') {
-      let result = await AddCourse({
+      const result = await AddCourse({
         title: data?.title,
         description: data?.description,
         duration: data?.duration,

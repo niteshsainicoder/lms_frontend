@@ -1,11 +1,10 @@
 'use client';
 
-import CourseItem from '@/components/CourseItem';
 import CourseItemRead from '@/components/CourseItemRead';
 import { GetAllCourses } from '@/utils/functions/CourseCrud';
 import React, { useEffect, useState } from 'react'
 
-const page = () => {
+const Page = () => {
     const [Data, setdata] = useState<any>();
     const [DisplayData, setDisplayData] = useState<any>([])
     useEffect(() => {
@@ -47,4 +46,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Page

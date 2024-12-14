@@ -22,7 +22,7 @@ interface Params {
 
 function AdminPage({ params }: Params) {
   const { Id } = React.use(params);  // Correctly unwrap the promise
-  const { popUpMessage, EditPopUp, setEditPopUp,setPopUpMessage } = useContexts();
+  const { popUpMessage, EditPopUp, setEditPopUp } = useContexts();
   const [data, setData] = useState<Items[]>([{ _id: "", title: "", description: "", duration: "", instructor: "" }]);
   
   
