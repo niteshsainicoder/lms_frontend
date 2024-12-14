@@ -19,10 +19,10 @@ type Item = {
 const Page = () => {
     const [DisplayData, setDisplayData] = useState<Item[]>([{ ownerId: '', _id: '', title: '', description: '', instructor: '', duration: '', disabled: false }]);
     useEffect(() => {
-        let result = localStorage.getItem('user')
+        const result = localStorage.getItem('user')
         if (result) {
 
-            let datas = JSON.parse(result!);
+            const datas = JSON.parse(result!);
             console.log('login data,', datas);
 
             const anotherData = async () => {
